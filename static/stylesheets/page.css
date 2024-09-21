@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root{
+    --color-body-bg: #242424;
+    --color-body-fg: #dbdbdb;
+    --color-card-bg: #171717;
+    --color-card-fg: #c7c7c7;
+    --color-highlight: #1f9122;
+
+    --color-btn-red: #bd222a;
+    --color-btn-blue: #2284bd;
+    --color-btn-green: #22bd2a;
+    --color-btn-orange: #bd6522;
+}
+
+h1#title{
+    font-size: 500%;
+    text-align: center;
+    font-family: "Rubik Mono One", monospace;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body{
+    background-color: var(--color-body-bg);
+    color: var(--color-body-fg);
+}
+
+#container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#grid{
+    width: 80%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+a.card-link{
+    text-decoration: none;
+}
+
+.card{
+    color: var(--color-card-fg);
+    background-color: var(--color-card-bg);
+    font-size: 200%;
+    width: 40ex;
+    height: 20ex;
+    border-radius: 25px;
+    padding: 10px;
+    padding-left: 20px;
+    outline-color: var(--color-card-bg);
+    outline-width: 1px;
+    outline-style: solid;
+    transition: all 0.5s;
+}
+
+.card:hover{
+    outline-color: var(--color-highlight);
+}
+
+.card span{
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.card h1{
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 150%;
+    line-height: 0;
+}
+
+

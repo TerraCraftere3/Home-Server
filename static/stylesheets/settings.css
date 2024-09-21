@@ -1,0 +1,71 @@
+input.basics-button{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 0;
+}
+
+input.basics-button:hover{
+    width: 100px;
+    height: 100px;
+    border: 0;
+}
+
+section#basics div{
+    transition: all 0.5s;
+    scale: 0.85;
+}
+
+section#basics div:hover{
+    scale: 1;
+}
+
+section#basics div:hover svg{
+    animation: basics-button 1.5s ease-in-out;
+    transform-origin: center;
+}
+
+section#basics form{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+
+section#basics form *{
+    grid-row: 1fr;
+    grid-column: 1fr;
+}
+
+section#basics form svg{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 25%;
+    top: 25%;
+    pointer-events: none;
+}
+
+@keyframes basics-button {
+    0%{
+        rotate: 0deg;
+    }
+    100%{
+        rotate: -360deg;
+    }
+}
+
+input#basics-restart{
+    background-color: var(--color-btn-orange);
+}
+
+input#basics-stop{
+    background-color: var(--color-btn-red);
+}
+
+section#basics{
+    width: 80%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 15px;
+}
