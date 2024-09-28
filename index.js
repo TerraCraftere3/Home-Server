@@ -135,6 +135,10 @@ app.get("/minecraft/get/:file", (req, res) => {
     console.log("Getting Minecraft Server File " + req.params.file)
     res.sendFile(__dirname + '/minecraft-server/' + req.params.file)
 })
+app.get("/minecraft/server/:server/:file", (req, res) => {
+    console.log("Getting Minecraft Server (Server " + req.params.server + ") File " + req.params.file)
+    res.sendFile(__dirname + '/minecraft-server/server/server' + req.params.server + "/" + req.params.file)
+})
 
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`)

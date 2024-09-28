@@ -12,23 +12,132 @@
 <body>
 
     <div id="container">
-
         <div id="sidebar">
             <a href="/minecraft/server/[I]/" class="sidebar-selected">Settings</a>
             <a href="/minecraft/server/[I]/overview">Overview</a>
         </div>
         <div id="content">
             <h1 id="title">Loading...</h1>
+            <div id="settings">
+
+            </div>
+            <div id="save">
+                <button id="save-btn" onclick="saveChanges()">Save</button>
+            </div>
         </div>
 
 
     </div>
     <script>
         var server_page_title = "Settings"
+        var server_properties_new_content = ""
+
+        const element_input_template = `<div class="setting">
+                    <span class="setting-title">[TITLE]</span>
+                    <div class="setting-input-container">[INPUT]</div>
+                    <img src="/icons/help.svg" alt="Help" onClick="openHelp([INDEX])">
+                </div>`
 
         function onServerDataReady(){
             console.log(server_data)
             console.log(server_template_data)
+
+            generateSettings()
+        }
+
+        function onChange(){
+            console.log("Regenerating file")
+            content = ""
+            console.log(document.getElementsByClassName("input-propertie"))
+            let elements = document.getElementsByClassName("input-propertie")
+            for (let i = 0; i < elements.length; i++) {
+                element = elements[i]
+                if(element.type == "checkbox"){
+                    content += element.id + ":" + element.checked + "\n"
+                }else{
+                    content += element.id + ":" + element.value + "\n"
+                }
+            }
+            console.log(content)
+            server_properties_new_content = content
+        }
+
+        async function saveChanges(){
+            await fetch("/minecraft/server/" + server_index + "/settings/change", {
+                method: "POST",
+                body: JSON.stringify({
+                    properties: server_properties_new_content,
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            });
+            await document.location.reload()
+            console.log("Updated properties")
+        }
+
+        async function generateSettings() {
+            async function generateSettingsOne(){
+                const response = await fetch("/minecraft/get/properties.json");
+                const data = await response.json();
+
+                var i = 0
+                data.forEach(propertie => {
+                    var input = ""
+
+                    switch(propertie["type"]){
+                        case "int":
+                            input = `<input [FLAGS] name="[NAME]" id="[NAME]" class="input-propertie">`
+                            var inputFlags = "required type=\"number\" min=\"" + propertie["range"]["min"] + "\" max=\"" + propertie["range"]["max"] + "\""
+                            input.replace("[FLAGS]", inputFlags)
+                            break;
+                        case "bool":
+                            input = `<label class="switch">
+    <input type="checkbox" name="[NAME]" id="[NAME]" class="input-propertie">
+    <span class="slider"></span>
+    </label>`
+                            break;
+                        case "enum":
+                            input = `<select required name="[NAME]" id="[NAME]" class="input-propertie">`
+                            propertie["values"].forEach(value => {
+                                input += "<option value=\"" + value + "\">" + value + "</option>"
+                            });
+                            input += `</select>`
+                            break;
+                    }
+                    document.getElementById("settings").innerHTML += element_input_template.replaceAll("[INPUT]", input).replaceAll("[TITLE]", propertie["title"]).replaceAll("[NAME]", propertie["name"]).replaceAll("[INDEX]", i)
+                    i++
+                });
+            }
+            async function generateSettingsTwo(){
+                const response = await fetch("/minecraft/server/" + server_index + "/server.properties");
+                var data = await response.text()
+                server_properties_new_content = data
+                data = data.split("\n")
+
+                data.forEach(propertie => {
+                    try{
+                        if(propertie != "") {
+                            var name = propertie.split(":")[0]
+                            var value = propertie.split(":")[1]
+                            var el = document.getElementById(name)
+                            if(value == "true"){
+                                el.checked = true
+                            }else if(value != "false"){
+                                el.value = value
+                            }
+                            el.onchange = onChange
+
+                        }
+                    }catch{
+
+                    }
+                });
+
+                console.log(data)
+            }
+            await generateSettingsOne()
+            await generateSettingsTwo()
         }
     </script>
     <script src="/scripts/minecraft-server.js"></script>

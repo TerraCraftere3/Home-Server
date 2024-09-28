@@ -3,36 +3,41 @@
         "title": "Accept Transfers",
         "description": "Allows servers to accept incoming transfers via a transfer packet.",
         "type": "bool",
-        "default": "false",
-        "name": "accept-transfers"
+        "default": false,
+        "name": "accept-transfers",
+        "isHidden": false
     },
     {
         "title": "Allow Flight",
         "description": "Allows users to use flight on the server while in Survival mode, if they have a mod that provides flight installed. With allow-flight enabled, griefers may become more common, because it makes their work easier. In Creative mode, this has no effect.",
         "type": "bool",
-        "default": "false",
-        "name": "allow-flight"
+        "default": false,
+        "name": "allow-flight",
+        "isHidden": false
     },
     {
         "title": "Allow Nether",
         "description": "Allows players to travel to the Nether.",
         "type": "bool",
-        "default": "true",
-        "name": "allow-nether"
+        "default": true,
+        "name": "allow-nether",
+        "isHidden": false
     },
     {
         "title": "Broadcast Console to Operators",
         "description": "Allows players to travel to the Nether.",
         "type": "bool",
-        "default": "true",
-        "name": "broadcast-console-to-ops"
+        "default": true,
+        "name": "broadcast-console-to-ops",
+        "isHidden": false
     },
     {
         "title": "Broadcast RCon Console to Operators",
         "description": "Send rcon console command outputs to all online operators.",
         "type": "bool",
-        "default": "true",
-        "name": "broadcast-rcon-to-ops"
+        "default": true,
+        "name": "broadcast-rcon-to-ops",
+        "isHidden": false
     },
     {
         "title": "Difficulty",
@@ -45,6 +50,97 @@
             "hard"
         ],
         "default": "easy",
-        "name": "difficulty"
+        "name": "difficulty",
+        "isHidden": false
+    },
+    {
+        "title": "Enable Command Blocks",
+        "description": "Enables command blocks",
+        "type": "bool",
+        "default": false,
+        "name": "enable-command-block",
+        "isHidden": false
+    },
+    {
+        "title": "Enable JMX Monitoring",
+        "description": "Exposes an MBean with the Object name net.minecraft.server:type=Server and two attributes averageTickTime and tickTimes exposing the tick times in milliseconds. In order for enabling JMX on the Java runtime you also need to add a couple of JVM flags to the startup as documented here: https://docs.oracle.com/javase/8/docs/technotes/guides/management/agent.html.",
+        "type": "bool",
+        "default": false,
+        "name": "enable-jmx-monitoring",
+        "isHidden": false
+    },
+    {
+        "title": "Enable Status",
+        "description": "Makes the server appear as \"online\" on the server list. If set to false, it suppresses replies from clients. This means it appears as offline, but still accepts connections.",
+        "type": "bool",
+        "default": true,
+        "name": "enable-status",
+        "isHidden": false
+    },
+    {
+        "title": "Enable Query",
+        "description": "Enables GameSpy4 protocol server listener. Used to get information about server.",
+        "type": "bool",
+        "default": false,
+        "name": "enable-query",
+        "isHidden": false
+    },
+    {
+        "title": "Enforce Secure Profile",
+        "description": "If set to true, players without a Mojang-signed public key cannot connect to the server. All messages sent to the server will also be left unsigned and cannot be reported. Vanilla players will get a warning about this when they connect to the server.",
+        "type": "bool",
+        "default": true,
+        "name": "enforce-secure-profile",
+        "isHidden": false
+    },
+    {
+        "title": "Enforce Whitelist",
+        "description": "Enforces the whitelist on the server. When this option is enabled, users who are not present on the whitelist (if it's enabled) get kicked from the server after the server reloads the whitelist file. \nfalse - No user gets kicked if not on the whitelist. \ntrue - Online users not on the whitelist get kicked.",
+        "type": "bool",
+        "default": false,
+        "name": "enforce-whitelist",
+        "isHidden": false
+    },
+    {
+        "title": "Entite Broadcast Range",
+        "description": "Controls how close entities need to be before being sent to clients. Higher values means they'll be rendered from farther away, potentially causing more lag. This is expressed the percentage of the default value. For example, setting to 50 makes it half as usual. This mimics the function on the client video settings (not unlike Render Distance, which the client can customize so long as it's under the server's setting).",
+        "type": "int",
+        "range": {
+            "min": 10,
+            "max": 1000
+        },
+        "default": "100",
+        "name": "entity-broadcast-range-percentage",
+        "isHidden": false
+    },
+    {
+        "title": "Force Gamemode",
+        "description": "Force players to join in the default game mode.\nfalse - Players join in the gamemode they left in.\ntrue - Players always join in the default gamemode.",
+        "type": "bool",
+        "default": false,
+        "name": "force-gamemode",
+        "isHidden": false
+    },
+    {
+        "title": "Gamemode",
+        "description": "Defines the mode of gameplay. If a legacy gamemode number is specified, it is silently converted to a gamemode name.",
+        "type": "enum",
+        "values": [
+            "survival",
+            "creative",
+            "adventure",
+            "spectator"
+        ],
+        "default": "survival",
+        "name": "gamemode",
+        "isHidden": false
+    },
+    {
+        "title": "Generate Structures",
+        "description": "Defines whether structures (such as villages) can be generated.\nfalse - Structures are not generated in new chunks.\ntrue - Structures are generated in new chunks.\nNote: Dungeons still generate if this is set to false.",
+        "type": "bool",
+        "default": true,
+        "name": "generate-structures",
+        "isHidden": false
     }
 ]

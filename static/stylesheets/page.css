@@ -81,7 +81,7 @@ a.card-link{
 }
 
 button,
-input[type="submit"] {
+input {
     background-color: var(--color-card-bg);
     color: var(--color-card-fg);
     font-size: 200%;
@@ -95,8 +95,12 @@ input[type="submit"] {
 }
 
 button:hover,
-input[type="submit"]:hover{
+input:hover{
     outline-color: var(--color-highlight);
+}
+
+:invalid{
+    outline-color: var(--color-btn-red)
 }
 
 select {
@@ -114,4 +118,8 @@ select {
 
 select:hover{
     outline-color: var(--color-highlight);
+}
+
+*{
+    transition: all 1 ease-in-out;
 }
