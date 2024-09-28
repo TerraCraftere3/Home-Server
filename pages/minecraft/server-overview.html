@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <link rel="stylesheet" href="/stylesheets/page.css">
+    <link rel="stylesheet" href="/stylesheets/minecraft.css">
+</head>
+<body>
+
+    <h1 id="title">Loading...</h1>
+    <div id="container">
+
+        <div id="sidebar">
+        </div>
+        <div id="content">
+            <select name="type" id="new-type-select" onchange="typeChange()">
+                <option value="">Choose a Framework</option>
+            </select>
+
+            <select name="version" id="new-version-select" onchange="versionChange()">
+                <option value="">Choose a Version</option>
+            </select>
+
+
+            <button id="server-create" onclick="createServer()"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>Create Server</button>
+        </div>
+
+
+    </div>
+    <script>
+        var server_page_title = "Overview"
+
+        function onServerDataReady(){
+            console.log(server_data)
+            console.log(server_template_data)
+        }
+    </script>
+    <script src="/scripts/minecraft-server.js"></script>
+</body>
+</html>

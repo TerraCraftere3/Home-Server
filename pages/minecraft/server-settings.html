@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <link rel="stylesheet" href="/stylesheets/page.css">
+    <link rel="stylesheet" href="/stylesheets/minecraft.css">
+    <link rel="stylesheet" href="/stylesheets/minecraft-server/page.css">
+    <link rel="stylesheet" href="/stylesheets/minecraft-server/settings.css">
+</head>
+<body>
+
+    <div id="container">
+
+        <div id="sidebar">
+            <a href="/minecraft/server/[I]/" class="sidebar-selected">Settings</a>
+            <a href="/minecraft/server/[I]/overview">Overview</a>
+        </div>
+        <div id="content">
+            <h1 id="title">Loading...</h1>
+        </div>
+
+
+    </div>
+    <script>
+        var server_page_title = "Settings"
+
+        function onServerDataReady(){
+            console.log(server_data)
+            console.log(server_template_data)
+        }
+    </script>
+    <script src="/scripts/minecraft-server.js"></script>
+</body>
+</html>

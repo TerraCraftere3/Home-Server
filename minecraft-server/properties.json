@@ -1,0 +1,50 @@
+[
+    {
+        "title": "Accept Transfers",
+        "description": "Allows servers to accept incoming transfers via a transfer packet.",
+        "type": "bool",
+        "default": "false",
+        "name": "accept-transfers"
+    },
+    {
+        "title": "Allow Flight",
+        "description": "Allows users to use flight on the server while in Survival mode, if they have a mod that provides flight installed. With allow-flight enabled, griefers may become more common, because it makes their work easier. In Creative mode, this has no effect.",
+        "type": "bool",
+        "default": "false",
+        "name": "allow-flight"
+    },
+    {
+        "title": "Allow Nether",
+        "description": "Allows players to travel to the Nether.",
+        "type": "bool",
+        "default": "true",
+        "name": "allow-nether"
+    },
+    {
+        "title": "Broadcast Console to Operators",
+        "description": "Allows players to travel to the Nether.",
+        "type": "bool",
+        "default": "true",
+        "name": "broadcast-console-to-ops"
+    },
+    {
+        "title": "Broadcast RCon Console to Operators",
+        "description": "Send rcon console command outputs to all online operators.",
+        "type": "bool",
+        "default": "true",
+        "name": "broadcast-rcon-to-ops"
+    },
+    {
+        "title": "Difficulty",
+        "description": "Defines the difficulty (such as damage dealt by mobs and the way hunger and poison affects players) of the server.",
+        "type": "enum",
+        "values": [
+            "peaceful",
+            "easy",
+            "normal",
+            "hard"
+        ],
+        "default": "easy",
+        "name": "difficulty"
+    }
+]

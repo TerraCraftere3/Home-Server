@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minecraft Server | Webserver</title>
     <link rel="stylesheet" href="/stylesheets/page.css">
+    <link rel="stylesheet" href="/stylesheets/minecraft.css">
 </head>
 <body>
 
@@ -12,10 +13,132 @@
     <div id="container">
         <div id="grid">
         </div>
+
+
+        <select name="type" id="new-type-select" onchange="typeChange()">
+            <option value="">Choose a Framework</option>
+        </select>
+
+        <select name="version" id="new-version-select" onchange="versionChange()">
+            <option value="">Choose a Version</option>
+        </select>
+
+
+        <button id="server-create" onclick="createServer()"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>Create Server</button>
     </div>
     <script>
-        cards = [{id: "1", title: "Server #1", desc: "Manage your Server<br>ID: 1", link: "/minecraft/1"}]
+        cards = []
     </script>
+    <script src="/scripts/minecraft.js"></script>
     <script src="/scripts/grid.js"></script>
+    <script>
+        var new_template_index = 0
+        var new_server_index = 0
+
+        function typeChange(){
+            type = document.getElementById("new-type-select").value
+            console.log("User selected framework: " + document.getElementById("new-type-select").value)
+            fetch("/minecraft/get/templates.json")
+            .then((response) => response.json())
+            .then((templates) => {
+                versions = []
+                templates.forEach(template => {
+                    if(template["type"] == type){
+                        versions.push(template["version"])
+                    }
+                })
+                document.getElementById("new-version-select").innerHTML = ""
+                document.getElementById("new-version-select").innerHTML += "<option value=\"\">Choose a version</option>"
+                versions.forEach(version => {
+                    document.getElementById("new-version-select").innerHTML += "<option value=\"" + version + "\">" + version + "</option>"
+                });
+            });
+        }
+
+        function versionChange(){
+            type = document.getElementById("new-type-select").value
+            version = document.getElementById("new-version-select").value
+            console.log("User selected version: " + document.getElementById("new-version-select").value)
+            fetch("/minecraft/get/templates.json")
+            .then((response) => response.json())
+            .then((templates) => {
+                new_template_index = 0
+                var i = 0
+                templates.forEach(template => {
+                    if(template["type"] == type){
+                        if(template["version"] == version){
+                            new_template_index = i
+                            console.log("User selected " + template["name"])
+                        }
+                    }
+                    i++
+                })
+            });
+        }
+
+        function createServer() {
+            console.log("Creating Server with template " + new_template_index)
+            fetch("/minecraft/createServer/", {
+                method: "POST",
+                body: JSON.stringify({
+                    template: new_template_index,
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+
+            setTimeout(function(){
+                generateDefaultProperties().then((content)=>{
+                    fetch("/minecraft/server/" + new_server_index + "/settings/change", {
+                        method: "POST",
+                        body: JSON.stringify({
+                            properties: content,
+                        }),
+                        headers: {
+                            "Content-type": "application/json; charset=UTF-8"
+                        }
+                    });
+                    document.location.reload()
+                });
+            }, 500);
+
+        }
+
+        fetch("/minecraft/get/templates.json")
+        .then((response) => response.json())
+        .then((templates) => {
+            types = []
+            templates.forEach(template => {
+                if(!types.includes(template["type"])){
+                    types.push(template["type"])
+                }
+            })
+            types.forEach(type => {
+                document.getElementById("new-type-select").innerHTML += "<option value=\"" + type + "\">" + type + "</option>"
+            });
+        });
+        fetch("/minecraft/get/server.json")
+        .then((response) => response.json())
+        .then((server) => {
+            server.forEach(s => {
+                new_server_index += 1
+            });
+
+            console.log(new_server_index)
+            fetch("/minecraft/get/templates.json")
+            .then((response) => response.json())
+            .then((templates) => {
+                c = []
+                i = 0
+                server.forEach(s => {
+                    t = templates[s["template"]]
+                    c.push({id: s["folder"].replace("\\", ""), title: s["name"], desc: "Version: " + t["version"] + "<br>Type: " + t["type"] + "<br>ID: " + i, link: "/minecraft/server/" + i})
+                    i++
+                });
+                createGridByVar(c)
+            });
+        });
+    </script>
 </body>
 </html>

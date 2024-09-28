@@ -31,6 +31,8 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    gap: 25px;
 }
 
 #grid{
@@ -78,4 +80,38 @@ a.card-link{
     line-height: 0;
 }
 
+button,
+input[type="submit"] {
+    background-color: var(--color-card-bg);
+    color: var(--color-card-fg);
+    font-size: 200%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 0;
+    outline-color: var(--color-card-bg);
+    outline-width: 1px;
+    outline-style: solid;
+    transition: all 0.5s;
+}
 
+button:hover,
+input[type="submit"]:hover{
+    outline-color: var(--color-highlight);
+}
+
+select {
+    background-color: var(--color-card-bg);
+    color: var(--color-card-fg);
+    font-size: 150%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 0;
+    outline-color: var(--color-card-bg);
+    outline-width: 1px;
+    outline-style: solid;
+    transition: all 0.5s;
+}
+
+select:hover{
+    outline-color: var(--color-highlight);
+}

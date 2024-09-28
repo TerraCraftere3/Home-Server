@@ -1,0 +1,30 @@
+[
+    {
+        "type": "Vanilla",
+        "version": "1.21.1",
+        "name": "Vanilla 1.21.1",
+        "folder": "/vanilla-1.21.1",
+        "enableMods": false
+    },
+    {
+        "type": "Vanilla",
+        "version": "1.16.5",
+        "name": "Vanilla 1.16.5",
+        "folder": "/vanilla-1.16.5",
+        "enableMods": false
+    },
+    {
+        "type": "Vanilla",
+        "version": "1.8.9",
+        "name": "Vanilla 1.8.9",
+        "folder": "/vanilla-1.8.9",
+        "enableMods": false
+    },
+    {
+        "type": "Forge",
+        "version": "1.21.1",
+        "name": "Forge 1.21.1 (52.0.16)",
+        "folder": "/forge-1.21.1-52.0.16",
+        "enableMods": true
+    }
+]
