@@ -88,7 +88,13 @@
                     switch(propertie["type"]){
                         case "int":
                             input = `<input [FLAGS] name="[NAME]" id="[NAME]" class="input-propertie">`
-                            var inputFlags = "required type=\"number\" min=\"" + propertie["range"]["min"] + "\" max=\"" + propertie["range"]["max"] + "\""
+                            var inputFlags = "required type=\"number\""
+                            if(propertie["range"]["min"] != null){
+                                 inputFlags += " min=\"" + propertie["range"]["min"] + "\""
+                            }
+                            if(propertie["range"]["max"] != null){
+                                inputFlags += " max=\"" + propertie["range"]["max"] + "\""
+                            }
                             input.replace("[FLAGS]", inputFlags)
                             break;
                         case "bool":
@@ -103,6 +109,11 @@
                                 input += "<option value=\"" + value + "\">" + value + "</option>"
                             });
                             input += `</select>`
+                            break;
+                        case "string":
+                            input = `<input [FLAGS] name="[NAME]" id="[NAME]" class="input-propertie">`
+                            var inputFlags = "type=\"text\""
+                            input.replace("[FLAGS]", inputFlags)
                             break;
                     }
                     document.getElementById("settings").innerHTML += element_input_template.replaceAll("[INPUT]", input).replaceAll("[TITLE]", propertie["title"]).replaceAll("[NAME]", propertie["name"]).replaceAll("[INDEX]", i)
@@ -121,6 +132,7 @@
                             var name = propertie.split(":")[0]
                             var value = propertie.split(":")[1]
                             var el = document.getElementById(name)
+                            console.log(name, value, el)
                             if(value == "true"){
                                 el.checked = true
                             }else if(value != "false"){
